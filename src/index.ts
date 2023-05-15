@@ -169,11 +169,9 @@ for (let k = 0; k < igMarkers.length; k++) {
   });
 }
 
-// Set the first .ig-marker and its corresponding .ig-slider as active
-const firstMarker = document.querySelector('.ig-marker');
-const firstSlider = document.querySelector('.ig-slider');
+const showDefault = document.querySelector('[data-id="agriculture-food"]');
 
-if (firstMarker && firstSlider) {
-  firstMarker.classList.add('active');
-  firstSlider.classList.add('active');
+// Trigger a click event on the element
+if (showDefault) {
+  showDefault.click();
 }
