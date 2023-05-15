@@ -130,6 +130,9 @@ if (window.innerWidth < 1024) {
 
   const sliderConfigs = [
     { selector: '.ig-slider.agriculture-food' },
+    { selector: '.ig-slider.energy' },
+    { selector: '.ig-slider.land-ecosystems' },
+    { selector: '.ig-slider.regenerative-governance' },
     { selector: '.ig-slider.tourism' },
   ];
 
@@ -174,27 +177,3 @@ for (let k = 0; k < igMarkers.length; k++) {
     }
   });
 }
-
-/* End IG
-
-const swiper = new Swiper('.ig-slider.agriculture-food', {
-  // configure Swiper to use modules
-  modules: [Navigation],
-  slidesPerView: 1.2,
-  spaceBetween: 30,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
-
-const swiper2 = new Swiper('.ig-slider.tourism', {
-  // configure Swiper to use modules
-  modules: [Navigation],
-  slidesPerView: 1.2,
-  spaceBetween: 30,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-}); */
