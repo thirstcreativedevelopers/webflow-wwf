@@ -119,15 +119,6 @@ if (window.innerWidth < 1024) {
     }
   }
 
-  // Set the first .ig-marker and its corresponding .ig-slider as active
-  const firstMarker = document.querySelector('.ig-marker');
-  const firstSlider = document.querySelector('.ig-slider');
-
-  if (firstMarker && firstSlider) {
-    firstMarker.classList.add('active');
-    firstSlider.classList.add('active');
-  }
-
   const sliderConfigs = [
     { selector: '.ig-slider.agriculture-food' },
     { selector: '.ig-slider.energy' },
@@ -176,4 +167,13 @@ for (let k = 0; k < igMarkers.length; k++) {
       }
     }
   });
+}
+
+// Set the first .ig-marker and its corresponding .ig-slider as active
+const firstMarker = document.querySelector('.ig-marker');
+const firstSlider = document.querySelector('.ig-slider');
+
+if (firstMarker && firstSlider) {
+  firstMarker.classList.add('active');
+  firstSlider.classList.add('active');
 }
