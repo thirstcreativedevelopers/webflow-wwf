@@ -1,93 +1,71 @@
 // core version + navigation, pagination modules:
 import Swiper, { Navigation } from 'swiper';
 
-// Get all ig-collection-items
+// Get all the .ig-collection-item elements
 const collectionItems = document.querySelectorAll('.ig-collection-item');
 
-// Loop through each ig-collection-item
-collectionItems.forEach(function (item) {
-  // Find the ig-marker element inside the current ig-collection-item
-  const marker = item.querySelector('.ig-marker');
-
-  // Get the values of data-top and data-left attributes
-  const topPos = marker.getAttribute('data-top');
-  const leftPos = marker.getAttribute('data-left');
-
-  // Set the absolute positioning of the marker element
-  marker.style.position = 'absolute';
-  marker.style.top = topPos;
-  marker.style.left = leftPos;
-
-  // Find the ig-close element inside the current ig-collection-item
-  const closeButton = item.querySelector('.ig-close');
-
-  if (window.innerWidth >= 1024) {
-    // Add a click event listener to the ig-marker
-    marker.addEventListener('click', function () {
-      // Remove the class "active" from all markers
-      const allMarkers = document.querySelectorAll('.ig-marker');
-      allMarkers.forEach(function (m) {
-        m.classList.remove('active');
-      });
-
-      // Remove all active classes from ig-item elements in all ig-collection-items
-      const allIgItems = document.querySelectorAll('.ig-item');
-      allIgItems.forEach(function (igItem) {
-        igItem.classList.remove('active');
-      });
-
-      // Get the value of the data-id attribute of the clicked ig-marker
-      const markerId = marker.getAttribute('data-id');
-
-      // Find the matching class inside the corresponding ig-list and hide it
-      const list = item.querySelector('.ig-list');
-      const listItem = list.querySelector('.' + markerId);
-      listItem.style.display = 'none';
-
-      // Add the class "active" to all ig-item elements inside the current ig-collection-item
-      const igItems = item.querySelectorAll('.ig-item');
-      igItems.forEach(function (igItem) {
-        igItem.classList.add('active');
-      });
-
-      // Add the class "active" to the marker element
-      marker.classList.add('active');
+// Add event listener to each item
+collectionItems.forEach((item) => {
+  item.addEventListener('click', function () {
+    // Remove active class from all items
+    collectionItems.forEach((item) => {
+      item.classList.remove('active');
     });
 
-    // Add a click event listener to the ig-close
-    closeButton.addEventListener('click', function (event) {
-      event.stopPropagation(); // Prevent click event propagation to the marker
+    // Add active class to the clicked item
+    this.classList.add('active');
+  });
+});
 
-      // Remove the class "active" from the parent element (ig-marker)
-      marker.classList.remove('active');
+window.addEventListener('load', function () {
+  // Get all the .ig-marker elements
+  const markers = document.querySelectorAll('.ig-marker-inner');
 
-      // Remove all active classes inside the item
-      const activeItems = item.querySelectorAll('.active');
-      activeItems.forEach(function (activeItem) {
-        activeItem.classList.remove('active');
-      });
+  // Set top and left values for each marker
+  markers.forEach((marker) => {
+    const leftPos = marker.getAttribute('data-left');
+    const topPos = marker.getAttribute('data-top');
+    console.log('positioned');
+
+    // Set the absolute positioning of the marker element
+    marker.style.position = 'absolute';
+    marker.style.top = topPos;
+    marker.style.left = leftPos;
+  });
+});
+
+// Get all elements with the class "ig-marker"
+const markers = document.getElementsByClassName('ig-marker');
+
+// Attach click event listener to each marker element
+Array.from(markers).forEach((marker) => {
+  marker.addEventListener('click', () => {
+    // Get all elements with classes "ig-list" and "ig-links"
+    const lists = document.getElementsByClassName('ig-list');
+    const links = document.getElementsByClassName('ig-links');
+
+    // Get the element with the class "ig-overlay"
+    const overlay = document.querySelector('.ig-overlay');
+
+    // Get the element with the class "ig-popup"
+    const popup = document.querySelector('.ig-popup');
+
+    // Hide all instances of the "ig-list" elements
+    Array.from(lists).forEach((list) => {
+      list.style.display = 'none';
     });
-  } else {
-    // Add a click event listener to the ig-marker
-    marker.addEventListener('click', function () {
-      // Remove the class "active" from all markers
-      const allMarkers = document.querySelectorAll('.ig-marker');
-      allMarkers.forEach(function (m) {
-        m.classList.remove('active');
-      });
 
-      // Add the class "active" to the marker element
-      marker.classList.add('active');
+    // Hide all instances of the "ig-links" elements
+    Array.from(links).forEach((link) => {
+      link.style.display = 'none';
     });
 
-    // Add a click event listener to the ig-close
-    closeButton.addEventListener('click', function (event) {
-      event.stopPropagation(); // Prevent click event propagation to the marker
+    // Hide the "ig-overlay" element
+    overlay.style.display = 'none';
 
-      // Remove the class "active" from the parent element (ig-marker)
-      marker.classList.remove('active');
-    });
-  }
+    // Hide the "ig-popup" element
+    popup.style.display = 'none';
+  });
 });
 
 // Check if the screen size is less than 1024px
@@ -144,7 +122,7 @@ if (window.innerWidth < 1024) {
 }
 
 // Handle click event on .ig-marker elements
-const igMarkers = document.querySelectorAll('.ig-marker');
+const igMarkers = document.querySelectorAll('.ig-collection-item');
 for (let k = 0; k < igMarkers.length; k++) {
   const igMarker = igMarkers[k];
 
@@ -167,11 +145,4 @@ for (let k = 0; k < igMarkers.length; k++) {
       }
     }
   });
-}
-
-const showDefault = document.querySelector('[data-id="agriculture-food"]');
-
-// Trigger a click event on the element
-if (showDefault) {
-  showDefault.click();
 }
