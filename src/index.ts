@@ -69,7 +69,7 @@ Array.from(markers).forEach((marker) => {
 });
 
 // Check if the screen size is less than 1024px
-if (window.innerWidth < 1024) {
+if (window.innerWidth < 992) {
   // Find each element with class .ig-list and get its data-list value
   const igLists = document.querySelectorAll('.ig-list');
   for (let i = 0; i < igLists.length; i++) {
